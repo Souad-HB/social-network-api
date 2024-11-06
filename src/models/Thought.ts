@@ -42,6 +42,7 @@ const reactionSchema = new Schema<IReaction>(
       getters: true,
     },
     id: false,
+    _id: false,
   }
 );
 // create the thought schema
