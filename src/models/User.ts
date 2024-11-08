@@ -36,7 +36,7 @@ const userSchema = new Schema<IUser>(
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: "user",
+        ref: "User",
       },
     ],
   },
@@ -48,7 +48,7 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-// creating a virtual property friendCount that retrieves the length of the user's frinds array
+// creating a virtual property friendCount that retrieves the length of the user's friends array
 userSchema
   .virtual("friendCount")
   // getter
@@ -57,6 +57,6 @@ userSchema
   });
 
 // initialize the user model
-const User = model("user", userSchema);
+const User = model("User", userSchema);
 
 export default User;

@@ -10,6 +10,7 @@ import {
 } from "../../controllers/thoughtController.js";
 
 const router = Router();
+
 // /thoughts/ - get all thoughts
 router.get("/", getAllThoughts);
 

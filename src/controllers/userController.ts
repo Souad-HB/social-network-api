@@ -4,7 +4,7 @@ import { Thought, User } from "../models/index.js";
 // /users - get all users
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).select("-__v");
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json(err);
@@ -12,12 +12,12 @@ export const getAllUsers = async (_req: Request, res: Response) => {
 };
 
 // /users/:userId - get a single user along with their friends array and thought array
-export const getSingleUser = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const getSingleUser = async (req: Request, res: Response) => {
   try {
-    const user = await User.findOne({ _id: req.params.userId }).select("-__v"); // removed the version property field from the response
+    const user = await User.findOne({ _id: req.params.userId })
+      .populate("thoughts") //populate thoughts data of that user
+      .populate('friends') //populate friends data of that user
+      .select("-__v"); // removed the version property field from the response
     if (!user) {
       res.status(404).json("User cant be found by that id");
       return;
@@ -53,7 +53,7 @@ export const updateUser = async (req: Request, res: Response) => {
       res.status(404).json("User not found by that id");
       return;
     }
-    res.status(201).json(user);
+    res.status(200).json(user);
     return;
   } catch (err) {
     console.log(err);
