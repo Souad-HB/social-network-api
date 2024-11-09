@@ -13,6 +13,8 @@
 - [**Screenshots**](#screenshots)
 - [**Technologies Used**](#technologies-used)
 - [**Setup and Installation**](#setup-and-installation)
+- [**Demonstration**](#demonstration)
+- [**Questions**](#questions)
 - [**License**](#license)
 
 ---
@@ -68,15 +70,21 @@ Follow these steps to get the application running on your local machine:
 
 3. **Run the Application**
 
-   ```bash
-   npm run seed
-   npm run start
-   ```
+    this demo is already seeded on start!
+
+```bash
+npm run start
+```
 
 4. **Access the App**  
+
    All routes on insomnia are accessible through: `http://localhost:3001`.
 
 ---
+
+## **Demonstration**
+
+Click on this link to see the demo for this app! [link](https://www.loom.com/share/146612775d9c4189b0cad1651b3296c3)
 
 ## **Questions**
 
