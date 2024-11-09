@@ -8,8 +8,6 @@ try {
   await db();
   await cleanDB();
 
-  // Create empty array to hold the users
-
   const thoughts = getRandomThoughts();
   const createdThoughts = await Thought.insertMany(thoughts);
   const createdIDs = createdThoughts.map(
@@ -20,7 +18,7 @@ try {
 
   console.table(users);
   console.table(thoughts);
-  console.info("Seeding complete! 🌱");
+  console.info("Seeding complete!");
   process.exit(0);
 } catch (err) {
   console.log("error seeding the db", err);

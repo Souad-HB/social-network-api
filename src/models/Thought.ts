@@ -42,7 +42,6 @@ const reactionSchema = new Schema<IReaction>(
       getters: true,
     },
     id: false,
-    _id: false,
   }
 );
 // create the thought schema
@@ -57,7 +56,7 @@ const thoughtSchema = new Schema<IThought>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (val: Date) => val.toLocaleString(), // formats the date
+      get: (val: Date) => val.toLocaleString(), // formats the date, this modifies the data directly into the db
     },
     username: {
       type: String,

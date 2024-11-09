@@ -16,7 +16,7 @@ export const getSingleUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ _id: req.params.userId })
       .populate("thoughts") //populate thoughts data of that user
-      .populate('friends') //populate friends data of that user
+      .populate("friends") //populate friends data of that user
       .select("-__v"); // removed the version property field from the response
     if (!user) {
       res.status(404).json("User cant be found by that id");

@@ -51,8 +51,7 @@ const userSchema = new Schema<IUser>(
 // creating a virtual property friendCount that retrieves the length of the user's friends array
 userSchema
   .virtual("friendCount")
-  // getter
-  .get(function (this: IUser) {
+  .get(function (this: IUser) { // this doesnt doesnt modify the data in the db
     return this.friends.length;
   });
 
