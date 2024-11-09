@@ -70,15 +70,19 @@ Follow these steps to get the application running on your local machine:
 
 3. **Run the Application**
 
-    this demo is already seeded on start!
+   this demo is already seeded on start!
 
-```bash
-npm run start
-```
+   ```bash
+   npm run start
+   ```
 
-4. **Access the App**  
+4. **Access the App**
 
    All routes on insomnia are accessible through: `http://localhost:3001`.
+
+5. **Load the insomnia json file**
+
+   Get the insomnia json file from assets/ folder and test the different endpoints!
 
 ---
 
