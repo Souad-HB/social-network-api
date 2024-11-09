@@ -88,7 +88,7 @@ Follow these steps to get the application running on your local machine:
 
 ## **Demonstration**
 
-Click on this link to see the demo for this app! [link](https://www.loom.com/share/146612775d9c4189b0cad1651b3296c3)
+Click on this [Link](https://www.loom.com/share/80f96782851c4b91a1923992a29ef65d) to see the demo for this app!
 
 ## **Questions**
 

@@ -50,7 +50,7 @@ export const updateUser = async (req: Request, res: Response) => {
       { runValidators: true, new: true }
     );
     if (!user) {
-      res.status(404).json("User not found by that id");
+      res.status(404).json({ message: "User not found by that id" });
       return;
     }
     res.status(200).json(user);
@@ -66,11 +66,13 @@ export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findOneAndDelete({ _id: req.params.userId });
     if (!user) {
-      res.status(404).json("No user found by that id");
+      res.status(404).json({ message: "No user found by that id" });
       return;
     }
     await Thought.deleteMany({ _id: { $in: user.thoughts } }); // delete the associated thoughts of the user
-    res.status(200).json("User and their thoughts have been deleted");
+    res
+      .status(200)
+      .json({ message: "User and their thoughts have been deleted" });
     return;
   } catch (err) {
     console.log(err);
@@ -79,23 +81,26 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 // add a friend to a user's friend list
-// /users/userId/friends
+// /users/userId/friends/:friendId
 export const addFriend = async (req: Request, res: Response) => {
   try {
     const friend = await User.findOne({ _id: req.params.friendId });
     if (!friend) {
-      res.status(404).json("This user cant be found to be added as a friend");
+      res
+        .status(404)
+        .json({ message: "This user cant be found to be added as a friend" });
       return;
     }
     const user = await User.findOneAndUpdate(
       { _id: req.params.userId },
       { $addToSet: { friends: friend._id } },
       { new: true } // return the updated document
-    );
+    ).populate("friends");
     if (!user) {
-      res.status(404).json("The user cant be found by that id");
+      res.status(404).json({ message: "The user cant be found by that id" });
       return;
     }
+
     res.status(201).json(user);
     return;
   } catch (err) {
@@ -109,7 +114,7 @@ export const removeFriend = async (req: Request, res: Response) => {
   try {
     const friend = await User.findOne({ _id: req.params.friendId });
     if (!friend) {
-      res.status(404).json("friend not found by that id");
+      res.status(404).json({ message: "friend not found by that id" });
       return;
     }
     const user = await User.findOneAndUpdate(
@@ -118,12 +123,11 @@ export const removeFriend = async (req: Request, res: Response) => {
       { new: true }
     );
     if (!user) {
-      res.status(404).json("User not found by that id");
+      res.status(404).json({ message: "User not found by that id" });
       return;
     }
-    res
-      .status(200)
-      .json({ message: "The friend is successfully deleted", user });
+
+    res.status(200).json({ message: "The friend is successfully deleted" });
     return;
   } catch (err) {
     console.log(err);

@@ -16,7 +16,7 @@ export const getSingleThought = async (req: Request, res: Response) => {
   try {
     const thought = await Thought.findOne({ _id: req.params.thoughtId });
     if (!thought) {
-      res.status(404).json("No thought found by that id");
+      res.status(404).json({ message: "No thought found by that id" });
       return;
     }
     res.status(200).json(thought);
@@ -37,7 +37,7 @@ export const createThought = async (req: Request, res: Response) => {
       { new: true }
     );
     if (!user) {
-      res.status(404).json("User not found by that id");
+      res.status(404).json({ message: "User not found by that id" });
     }
     res.status(201).json(thought);
     return;
@@ -58,7 +58,7 @@ export const updateThought = async (req: Request, res: Response) => {
       res.status(404).json("Thought not found by that id");
       return;
     }
-    res.status(200).json(thought);
+    res.status(200).json({ message: "Thought has been updated", thought });
     return;
   } catch (err) {
     res.status(500).json(err);
@@ -72,7 +72,7 @@ export const removeThought = async (req: Request, res: Response) => {
       _id: req.params.thoughtId,
     });
     if (!thought) {
-      res.status(404).json("Thought cant be found by that id");
+      res.status(404).json({ message: "Thought cant be found by that id" });
       return;
     }
     const user = await User.findOneAndUpdate(
@@ -86,7 +86,7 @@ export const removeThought = async (req: Request, res: Response) => {
       res.status(404).json("No user associated with that thought id was found");
       return;
     }
-    res.status(200).json("Thought has been deleted");
+    res.status(200).json({ message: "Thought has been deleted" });
   } catch (err) {
     res.status(500).json(err);
     return;
@@ -105,7 +105,7 @@ export const createReaction = async (req: Request, res: Response) => {
       { runValidators: true, new: true }
     );
     if (!thought) {
-      res.status(404).json("Thought not found by that id");
+      res.status(404).json({ message: "Thought not found by that id" });
       return;
     }
     res.status(200).json(thought);
@@ -125,10 +125,12 @@ export const removeReaction = async (req: Request, res: Response) => {
       { new: true }
     );
     if (!thought) {
-      res.status(404).json("No thought was found by that id");
+      res.status(404).json({ message: "No thought was found by that id" });
       return;
     }
-    res.status(200).json(thought);
+    res
+      .status(200)
+      .json({ message: "Reaction has been removed from the thought", thought });
     return;
   } catch (err) {
     res.status(500).json(err);
